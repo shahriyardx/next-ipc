@@ -20,7 +20,7 @@ class Cog(commands.Cog):
         return user._to_minimal_user_json()
 
 
-class CCV2(commands.AutoShardedBot):
+class IPCBot(commands.AutoShardedBot):
     def __init__(self, **options) -> None:
         super().__init__(**options)
 
@@ -31,7 +31,7 @@ class CCV2(commands.AutoShardedBot):
 intents = Intents.default()
 intents.message_content = True
 
-bot = CCV2(command_prefix="t", intents=intents)
+bot = IPCBot(command_prefix="t", intents=intents)
 bot.ipc_server = IPCServer(bot, secret_key="test")
 bot.ipc_server.start()
 bot.add_cog(Cog(bot))
