@@ -31,4 +31,10 @@ class IPCClient:
                 f"{'wss' if self.ssl else 'ws'}://{self.host}:{self.port}"
             ) as con:
                 await con.send(json.dumps(payload))
-                return await con.recv()
+
+                message = await con.recv()
+                try:
+                    data = json.loads(message)
+                    return data
+                except:
+                    return message
