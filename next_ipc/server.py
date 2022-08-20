@@ -69,6 +69,10 @@ class IPCServer:
                 await self.send_error(websocket, "invalid secret key", 403)
                 continue
 
+            if endpoint not in self._endpoints:
+                await self.send_error(websocket, "invalid endpoint", 404)
+                continue
+
             try:
                 attempted_cls = self.bot.cogs.get(
                     self._endpoints[endpoint].__qualname__.split(".")[0]
