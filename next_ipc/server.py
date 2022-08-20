@@ -20,7 +20,7 @@ class IPCServer:
         self.port = port
         self.loop = bot.loop
         self._endpoints = {}
-        self.secret_key = secret_key
+        self._secret_key = secret_key
 
     def route(self, name=None):
         def decorator(func):
@@ -65,7 +65,7 @@ class IPCServer:
             endpoint = response.endpoint
             headers = response.headers
 
-            if self.secret_key and self.secret_key != headers.Authorization:
+            if self._secret_key and self._secret_key != headers.Authorization:
                 await self.send_error(websocket, "invalid secret key", 403)
                 continue
 

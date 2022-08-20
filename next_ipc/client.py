@@ -17,12 +17,12 @@ class IPCClient:
         self.ssl = ssl
         self.host = host
         self.port = port
-        self.secret_key = secret_key
+        self._secret_key = secret_key
 
     async def request(self, endpoint, **kwargs):
         payload = {
             "endpoint": endpoint,
-            "headers": {"Authorization": self.secret_key},
+            "headers": {"Authorization": self._secret_key},
             "data": kwargs,
         }
 
