@@ -2,7 +2,7 @@ import json
 
 from websockets.server import serve
 
-from .response import IPCResponse
+from .models import IPCResponse
 
 
 class IPCServer:
