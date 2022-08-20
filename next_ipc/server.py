@@ -70,7 +70,7 @@ class IPCServer:
                 continue
 
             if endpoint not in self._endpoints:
-                await self.send_error(websocket, "invalid endpoint", 404)
+                await self.send_error(websocket, f"invalid endpoint '{endpoint}'", 404)
                 continue
 
             try:
@@ -93,7 +93,9 @@ class IPCServer:
                     await self.send_response(websocket, None)
             except Exception as error:
                 await self.send_error(
-                    websocket, f"internal server error, {type(error).__name__}", 500
+                    websocket,
+                    f"internal server error. Type: {type(error).__name__}",
+                    500,
                 )
 
     def start(self):
